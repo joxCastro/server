@@ -27,10 +27,7 @@ db.connect((err) => {
   }
 });
 
-app.use(cors({
-  origin: 'http://localhost:8100', // Solo permitir solicitudes desde localhost:8100
-  // Otros parámetros de configuración aquí
-}));
+app.use(cors({}));
 
 
 // Rutas para tu API
