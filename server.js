@@ -46,6 +46,10 @@ app.get('/api/categorias', (req, res) => {
   });
 });
 
+app.get('/api', (req, res) => {
+  res.json(res);
+});
+
 app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve los resultados como JSON
     const consultaSQL = 'SELECT * FROM relator';
