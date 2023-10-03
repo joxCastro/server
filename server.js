@@ -27,8 +27,8 @@ db.connect((err) => {
   }
 });
 
-// Configura CORS para permitir solicitudes desde cualquie lado
-app.use(cors('http:localhost:8100'));
+// Habilita CORS para permitir solicitudes desde cualquier origen
+app.use(cors());
 
 
 // Rutas para tu API
