@@ -11,10 +11,10 @@ const port = 80; // Puedes usar el puerto que desees
 
 // Configura la conexión a la base de datos MySQL
 const dbConfig = {
-  host: 'empresa27.empresadns.net',
-  user: 'tmcapaci_pagina2',
-  password: 'lIdLiX&uCVqv',
-  database: 'tmcapaci_pagina2',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 const db = mysql.createConnection(dbConfig);
