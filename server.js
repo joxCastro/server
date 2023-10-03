@@ -27,7 +27,7 @@ db.connect((err) => {
   }
 });
 
-app.use(cors({}));
+app.use(cors());
 
 
 // Rutas para tu API
