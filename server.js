@@ -28,7 +28,7 @@ db.connect((err) => {
 });
 
 // Configura CORS para permitir solicitudes desde cualquie lado
-app.use(cors());
+app.use(cors('https://dorado-faloodeh-fb79f6.netlify.app'));
 
 
 // Rutas para tu API
