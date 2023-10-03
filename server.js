@@ -46,8 +46,8 @@ app.get('/api/categorias', (req, res) => {
   });
 });
 
-app.get('/api', (req, res) => {
-  res.json(res);
+app.get('/api', () => {
+  res.json('SE ejecuto la consulta /api');
 });
 
 app.get('/api/relatores', (req, res) => {
