@@ -7,12 +7,12 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = 80; // Puedes usar el puerto que desees
+const port = 443; // Puedes usar el puerto que desees
 
 // Configura la conexión a la base de datos MySQL
 const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+  host: process.env.DB_HOST, /**/
+  user: process.env.DB_USER, /*empresa27.empresadns.net----tmcapaci_pagina2----lIdLiX&uCVqv----tmcapaci_pagina2*/
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 };
@@ -44,10 +44,6 @@ app.get('/api/categorias', (req, res) => {
       res.json(resultados);
     }
   });
-});
-
-app.get('/api', () => {
-  res.json('SE ejecuto la consulta /api');
 });
 
 app.get('/api/relatores', (req, res) => {
