@@ -11,10 +11,10 @@ const port = 80; // Puedes usar el puerto que desees
 
 // Configura la conexión a la base de datos MySQL
 const dbConfig = {
-  host: 'empresa27.empresadns.net', /*process.env.DB_HOST----process.env.DB_USER----process.env.DB_PASSWORD----process.env.DB_NAME*/
-  user: 'tmcapaci_pagina2', /*'empresa27.empresadns.net'----'tmcapaci_pagina2'----'lIdLiX&uCVqv'----'tmcapaci_pagina2'*/
-  password: 'lIdLiX&uCVqv',
-  database: 'tmcapaci_pagina2',
+  host: process.env.DB_HOST, /*process.env.DB_HOST----process.env.DB_USER----process.env.DB_PASSWORD----process.env.DB_NAME*/
+  user: process.env.DB_USER, /*'empresa27.empresadns.net'----'tmcapaci_pagina2'----'lIdLiX&uCVqv'----'tmcapaci_pagina2'*/
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 const db = mysql.createConnection(dbConfig);
@@ -76,13 +76,13 @@ app.get('/api/relatores', (req, res) => {
   app.get('/api/relatores/:numero', (req, res) => {
     // Obtén el número de la URL
     const numero = req.params.numero;
-  
+
     // Asegúrate de que `numero` sea un número entero
     const idRelator = parseInt(numero);
-  
+
     // Realiza una consulta a la base de datos y devuelve el resultado como JSON
     const consultaSQL = 'SELECT * FROM relator WHERE idRelator = ?';
-  
+
     db.query(consultaSQL, [idRelator], (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
