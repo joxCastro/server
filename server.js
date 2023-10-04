@@ -10,24 +10,52 @@ const app = express();
 const port = 3000; // Puedes usar el puerto que desees
 
 // Configura la conexión a la base de datos MySQL
-const dbConfig = {
-  host: process.env.DB_HOST || 'empresa27.empresadns.net', /*process.env.DB_HOST----process.env.DB_USER----process.env.DB_PASSWORD----process.env.DB_NAME*/
-  user: process.env.DB_USER || 'tmcapaci_pagina2', /*'empresa27.empresadns.net'----'tmcapaci_pagina2'----'lIdLiX&uCVqv'----'tmcapaci_pagina2'*/
+//const dbConfig = {
+//  host: process.env.DB_HOST || 'empresa27.empresadns.net', /*process.env.DB_HOST----process.env.DB_USER----process.env.DB_PASSWORD----process.env.DB_NAME*/
+//  user: process.env.DB_USER || 'tmcapaci_pagina2', /*'empresa27.empresadns.net'----'tmcapaci_pagina2'----'lIdLiX&uCVqv'----'tmcapaci_pagina2'*/
+//  password: process.env.DB_PASSWORD || 'lIdLiX&uCVqv',
+//  database: process.env.DB_NAME || 'tmcapaci_pagina2',
+//  waitForConnections: true, // Esperar conexiones en lugar de rechazarlas cuando no estén disponibles
+//  connectionLimit: 10, // Número máximo de conexiones en el pool
+//  queueLimit: 0 // Sin límite de solicitudes en cola
+//};
+//
+//const db = mysql.createConnection(dbConfig);
+//
+//db.connect((err) => {
+//  if (err) {
+//    console.error('Error de conexión a la base de datos:', err);
+//  } else {
+//    console.log('Conexión exitosa a la base de datos MySQL');
+//  }
+//});
+
+const mysql = require('mysql2');
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'empresa27.empresadns.net',
+  user: process.env.DB_USER || 'tmcapaci_pagina2',
   password: process.env.DB_PASSWORD || 'lIdLiX&uCVqv',
   database: process.env.DB_NAME || 'tmcapaci_pagina2',
-};
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 
-const db = mysql.createConnection(dbConfig);
-
-db.connect((err) => {
+pool.getConnection((err, connection) => {
   if (err) {
     console.error('Error de conexión a la base de datos:', err);
   } else {
     console.log('Conexión exitosa a la base de datos MySQL');
+    connection.release(); // Liberar la conexión al pool
   }
 });
 
 app.use(cors());
+
+process.on('uncaughtException', (err) => {
+  console.error('Excepción no controlada:', err);
+});
 
 
 // Rutas para tu API
