@@ -51,7 +51,8 @@ pool.getConnection((err, connection) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('¡Bienvenido a mi sitio web!');
+  // Lógica para generar la página principal
+  res.send('<html><body><h1>Bienvenido a mi sitio web</h1></body></html>');
 });
 
 app.use(cors());
