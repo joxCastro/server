@@ -57,6 +57,9 @@ process.on('uncaughtException', (err) => {
   console.error('Excepción no controlada:', err);
 });
 
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido a mi sitio web!');
+});
 
 // Rutas para tu API
 app.get('/api/categorias', (req, res) => {
