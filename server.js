@@ -66,7 +66,7 @@ app.get('/api/categorias', (req, res) => {
   // Realiza una consulta a la base de datos y devuelve los resultados como JSON
   const consultaSQL = 'SELECT * FROM categorias';
 
-  db.query(consultaSQL, (error, resultados) => {
+  pool.query(consultaSQL, (error, resultados) => {
     if (error) {
       console.error('Error al ejecutar la consulta:', error);
       res.status(500).json({ error: 'Error interno del servidor' });
@@ -80,7 +80,7 @@ app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve los resultados como JSON
     const consultaSQL = 'SELECT * FROM relator';
   
-    db.query(consultaSQL, (error, resultados) => {
+    pool.query(consultaSQL, (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -94,7 +94,7 @@ app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve los resultados como JSON
     const consultaSQL = 'SELECT cursos.*, categorias.valor AS valorCategoria FROM cursos INNER JOIN categorias ON cursos.idCategoria = categorias.idCategoria';
 
-    db.query(consultaSQL, (error, resultados) => {
+    pool.query(consultaSQL, (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -114,7 +114,7 @@ app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve el resultado como JSON
     const consultaSQL = 'SELECT * FROM relator WHERE idRelator = ?';
 
-    db.query(consultaSQL, [idRelator], (error, resultados) => {
+    pool.query(consultaSQL, [idRelator], (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -140,7 +140,7 @@ app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve el resultado como JSON
     const consultaSQL = 'SELECT * FROM cursos WHERE idCurso = ?';
   
-    db.query(consultaSQL, [idCurso], (error, resultados) => {
+    pool.query(consultaSQL, [idCurso], (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -163,7 +163,7 @@ app.get('/api/relatores', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve el resultado como JSON
     const consultaSQL = 'SELECT * FROM cursos WHERE relatorA = ? OR relatorB = ?';
   
-    db.query(consultaSQL, [nombre, nombre], (error, resultados) => {
+    pool.query(consultaSQL, [nombre, nombre], (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
