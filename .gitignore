@@ -1,0 +1,11 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Logs y archivos temporales
+logs/
+*.log
+npm-debug.log*
+
+# Entorno local
+.env

@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 
 const app = express();
 const port = proceso.env.PORT || 3000 ;// Puedes usar el puerto que desees
+const hostname = '186.64.119.90'
 
 // Configura la conexión a la base de datos MySQL
 //const dbConfig = {
@@ -180,7 +181,7 @@ app.get('/api/relatores', (req, res) => {
   });
 
 // Iniciar el servidor
-app.listen(port, () => {
+app.listen(port,hostname, () => {
   console.log(`Servidor Node.js escuchando en el puerto ${port}`);
 });
 
