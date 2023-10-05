@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = 3000; // Puedes usar el puerto que desees
+const port = proceso.env.PORT || 3000 ;// Puedes usar el puerto que desees
 
 // Configura la conexión a la base de datos MySQL
 //const dbConfig = {
