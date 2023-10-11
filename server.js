@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = proceso.env.PORT || 3000 ;// Puedes usar el puerto que desees
-const hostname = '186.64.119.90'
+// Puedes usar el puerto que desees
+//const hostname = '186.64.119.90'
+const port = 3000;
 
 // Configura la conexión a la base de datos MySQL
 //const dbConfig = {
@@ -93,9 +94,27 @@ app.get('/api/relatores', (req, res) => {
 
   app.get('/api/cursos', (req, res) => {
     // Realiza una consulta a la base de datos y devuelve los resultados como JSON
-    const consultaSQL = 'SELECT cursos.*, categorias.valor AS valorCategoria FROM cursos INNER JOIN categorias ON cursos.idCategoria = categorias.idCategoria';
+    const consultaSQL = 'SELECT cursos.*, categorias.valor AS valor FROM cursos INNER JOIN categorias ON cursos.idCategoria = categorias.idCategoria';
 
     pool.query(consultaSQL, (error, resultados) => {
+      if (error) {
+        console.error('Error al ejecutar la consulta:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+      } else {
+        res.json(resultados);
+      }
+    });
+  });
+
+  app.get('/api/cursos/carga/:numero', (req, res) => {
+    // Obtén el número de la URL
+    const numero = req.params.numero;
+    // Asegúrate de que `numero` sea un número entero
+    const idCurso = parseInt(numero);
+    // Realiza una consulta a la base de datos y devuelve los resultados como JSON
+    const consultaSQL = 'SELECT cursos.*, categorias.valor AS valor FROM cursos INNER JOIN categorias ON cursos.idCategoria = categorias.idCategoria WHERE idCurso BETWEEN 1 AND ?';
+
+    pool.query(consultaSQL,[idCurso], (error, resultados) => {
       if (error) {
         console.error('Error al ejecutar la consulta:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -181,7 +200,7 @@ app.get('/api/relatores', (req, res) => {
   });
 
 // Iniciar el servidor
-app.listen(port,hostname, () => {
+app.listen(port, () => {
   console.log(`Servidor Node.js escuchando en el puerto ${port}`);
 });
 
